@@ -1,4 +1,5 @@
-const API = "http://localhost:3000/reservations";
+const API = "https://ticketboss-api.onrender.com/reservations";
+
 
 /**
  * Load event summary
