@@ -1,0 +1,163 @@
+/* ===============================
+   Global Reset & Base Styling
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  color: #333;
+}
+
+/* ===============================
+   Main Heading
+================================ */
+h1 {
+  color: #ffffff;
+  margin-bottom: 35px;
+  font-size: 2.3rem;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
+
+/* ===============================
+   Card Layout
+================================ */
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 700px;              /* Expanded width */
+  padding: 28px 32px;
+  margin-bottom: 30px;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Card Hover Effect */
+.card:hover {
+  transform: translateY(-6px);
+  background-color: #f7f9ff;     /* Subtle hover color */
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* ===============================
+   Card Titles
+================================ */
+.card h2 {
+  margin-bottom: 18px;
+  font-size: 1.5rem;
+  color: #1f2937;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 8px;
+}
+
+/* ===============================
+   Text Content
+================================ */
+.card p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-top: 14px;
+  color: #374151;
+  white-space: pre-line;
+}
+
+/* ===============================
+   Input Fields
+================================ */
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  font-size: 1rem;
+  transition: 
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input::placeholder {
+  color: #9ca3af;
+}
+
+input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+}
+
+/* ===============================
+   Buttons
+================================ */
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(135deg, #667eea, #5a67d8);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+/* Button Hover */
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #4c51bf, #4338ca);
+}
+
+/* Button Click */
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===============================
+   Status Messages
+================================ */
+#reserveResult {
+  margin-top: 16px;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+#cancelResult {
+  margin-top: 16px;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+/* ===============================
+   Responsive Design
+================================ */
+@media (max-width: 768px) {
+  .card {
+    max-width: 95%;
+    padding: 22px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}

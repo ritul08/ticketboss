@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: TicketBoss API
+  description: |
+    TicketBoss is a real-time event ticket reservation API.
+    It uses optimistic concurrency control to prevent overbooking
+    and provides instant accept/deny responses.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /reservations:
+    post:
+      summary: Reserve seats for the event
+      description: Reserve seats instantly for a partner.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - partnerId
+                - seats
+              properties:
+                partnerId:
+                  type: string
+                  example: abc-corp
+                seats:
+                  type: integer
+                  example: 3
+      responses:
+        "201":
+          description: Seats successfully reserved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservationId:
+                    type: string
+                    example: c1bb7223-5f38-49b0-a93f-e3a65185828e
+                  seats:
+                    type: integer
+                    example: 3
+                  status:
+                    type: string
+                    example: confirmed
+        "400":
+          description: Invalid seat count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Seats must be between 1 and 10
+        "409":
+          description: Not enough seats available
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Not enough seats left
+
+    get:
+      summary: Get event summary
+      description: Returns current seat availability and event metadata.
+      responses:
+        "200":
+          description: Event summary retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventId:
+                    type: string
+                    example: node-meetup-2025
+                  name:
+                    type: string
+                    example: Node.js Meet-up
+                  totalSeats:
+                    type: integer
+                    example: 500
+                  availableSeats:
+                    type: integer
+                    example: 490
+                  reservationCount:
+                    type: integer
+                    example: 10
+                  version:
+                    type: integer
+                    example: 5
+
+  /reservations/{reservationId}:
+    delete:
+      summary: Cancel a reservation (full or partial)
+      description: |
+        Cancels seats from an existing reservation.
+        - If seats are not provided → full cancellation
+        - If seats are provided → partial cancellation
+      parameters:
+        - name: reservationId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: c1bb7223-5f38-49b0-a93f-e3a65185828e
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seats:
+                  type: integer
+                  example: 2
+      responses:
+        "200":
+          description: Partial cancellation successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Cancellation successful
+                  remainingSeats:
+                    type: integer
+                    example: 3
+        "204":
+          description: Reservation fully cancelled
+        "400":
+          description: Invalid cancellation request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid seats to cancel
+        "404":
+          description: Reservation not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Reservation not found

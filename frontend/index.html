@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TicketBoss</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>🎟 TicketBoss – Node.js Meetup</h1>
+
+  <!-- Event Summary -->
+  <div class="card">
+    <h2>Event Summary</h2>
+    <p id="summary">Loading...</p>
+    <button onclick="loadSummary()">Refresh</button>
+  </div>
+
+  <!-- Reserve Seats -->
+  <div class="card">
+    <h2>Reserve Seats</h2>
+    <input type="text" id="partnerId" placeholder="Partner ID">
+    <input type="number" id="seats" placeholder="Seats (1–10)">
+    <button onclick="reserveSeats()">Reserve</button>
+    <p id="reserveResult"></p>
+  </div>
+
+  <!-- Cancel Reservation -->
+  <div class="card">
+    <h2>Cancel Reservation</h2>
+    <input type="text" id="reservationId" placeholder="Reservation ID">
+    <input type="number" id="cancelSeats" placeholder="Seats to cancel (leave empty = full cancel)">
+    <button onclick="cancelReservation()">Cancel</button>
+    <p id="cancelResult"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
